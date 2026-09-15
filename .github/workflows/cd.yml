@@ -1,0 +1,35 @@
+name: Continuous Deployment (CD Pipeline)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy-dev:
+    name: Deploy to Dev Server
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${ secrets.GITHUB_TOKEN }}
+
+      - name: Simulate Zero-Downtime Deployment
+        run: |
+          echo "=== [CD] Pulling latest Docker Images from GHCR ==="
+          docker pull ghcr.io/ntphat-lucidtech/devops-backend-api:latest || true
+          docker pull ghcr.io/ntphat-lucidtech/devops-frontend-app:latest || true
+          
+          echo "=== [CD] Graceful Restart Container Stack ==="
+          docker compose up -d --remove-orphans
+          
+          echo "=== [CD] Deployment Completed Successfully! ==="

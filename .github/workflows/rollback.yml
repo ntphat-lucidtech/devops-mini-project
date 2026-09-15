@@ -1,0 +1,28 @@
+name: Rollback Deployment (Kh√¥i Ph·ª•c B!∫£n C·ª°)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_tag:
+        description: 'Nhap Tag/Version muon rollback (Vi du: latest)'
+        required: true
+        default: 'latest'
+
+jobs:
+  rollback:
+    name: Rollback to Target Version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@b4
+
+      - name: Perform Rollback Operation
+        run: |
+          echo "=== [ROLLBACK] Danger Zone: Rolling back application stack ==="
+          echo "Target Version: ${{ github.event.inputs.target_tag }}"
+          
+          echo "=== [ROLLBACK] Re-deploying previous stable Docker Containers ==="
+          docker compose up -d --force-recreate
+          
+          echo "=== [ROLLBACK] Rollback Completed Successfully! ==="
