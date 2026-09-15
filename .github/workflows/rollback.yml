@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@b4
+        uses: actions/checkout@v4
 
       - name: Prepare Environment File
         run: cp .env.example .env 2>/dev/null || true
