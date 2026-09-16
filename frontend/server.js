@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     </head>
     <body>
       <div class="card">
-        <h1>🚀 Fullstack Mini-Project (Docker Compose)</h1>
+        <h1>helo bạn hiền</h1>
         <p>Frontend -> Backend (.NET API) -> Database (PostgreSQL)</p>
         <p>Connected Backend API: <code>${API_URL}</code></p>
         <span class="badge">Docker Compose Status: ACTIVE</span>
