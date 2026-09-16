@@ -12,7 +12,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-CHELL", "pg_isready -U {${POSTGRES_USER:-devops_admin} -d ${POSTGRES_DB:-devops_db}"]
+      test: pg_isready -U devops_admin -d devops_db
       interval: 3s
       timeout: 3s
       retries: 10
@@ -32,7 +32,7 @@ services:
       - POSTGRES_USER=devops_admin
       - POSTGRES_PASSWORD=SuperSecretPassword123!
       - POSTGRES_DB=devops_db
-    depends_on: 
+    depends_on:
       database:
         condition: service_healthy
     networks:
@@ -56,6 +56,7 @@ services:
 networks:
   devops-net:
     driver: bridge
+
 volumes:
   postgres_data:
     driver: local

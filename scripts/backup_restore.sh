@@ -40,9 +40,9 @@ echo -e "${YELLOW}====================================================${NC}"
 
 TEST_DB="devops_db_restore_test"
 
-# Tạo DB test
-docker exec -t "$DB_CONTAINER" psql -U "$DB_USER" -c "DROP DATABASE IF EXISTS ${TEST_DB};" 2>/dev/null || true
-docker exec -t "$DB_CONTAINER" psql -U "$DB_USER" -c "CREATE DATABASE ${TEST_DB};"
+# Tạo DB test (chỉ định rõ -d devops_db)
+docker exec -t "$DB_CONTAINER" psql -U "$DB_USER" -d "$DB_NAME" -c "DROP DATABASE IF EXISTS ${TEST_DB};" 2>/dev/null || true
+docker exec -t "$DB_CONTAINER" psql -U "$DB_USER" -d "$DB_NAME" -c "CREATE DATABASE ${TEST_DB};"
 
 # Restore dữ liệu từ file backup sang DB test
 docker exec -i "$DB_CONTAINER" psql -U "$DB_USER" -d "$TEST_DB" < "$BACKUP_FILE" > /dev/null 2>&1
