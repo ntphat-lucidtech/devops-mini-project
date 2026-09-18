@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     </head>
     <body>
       <div class="card">
-        <h1>yasuo là anh em của akali</h1>
+        <h1>helooooo hi  </h1>
         <p>Frontend -> Backend (.NET API) -> Database (PostgreSQL)</p>
         <p>Connected Backend API: <code>${API_URL}</code></p>
         <span class="badge">Docker Compose Status: ACTIVE</span>
